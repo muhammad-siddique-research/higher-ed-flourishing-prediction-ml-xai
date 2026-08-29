@@ -50,6 +50,8 @@ Grounded in Tinto’s Interactionalist Model, Astin’s Student Involvement Theo
 | **ElasticNet (L1/L2)** | 0.442 ± 0.03 | 0.381 | 0.302 |
 
 ---
+## Streamlit App
+https://higher-ed-flourishing-prediction-ml-xai-cj3qpcffjve46ochqrdtn9.streamlit.app/
 
 ## 👨‍🔬 Authors & Affiliation
 

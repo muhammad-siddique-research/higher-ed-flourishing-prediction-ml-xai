@@ -216,3 +216,16 @@ __marimo__/
 
 # Streamlit
 .streamlit/secrets.toml
+
+# Restricted student research data, model artifacts, and derived outputs:
+data/raw/
+data/private/
+results/
+figures/
+artifacts/
+models/
+*.joblib
+*.pkl
+.env
+.env.*
+!.env.example

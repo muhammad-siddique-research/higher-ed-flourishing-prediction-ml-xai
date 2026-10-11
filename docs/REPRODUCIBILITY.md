@@ -41,7 +41,7 @@ python -m src.train_and_evaluate --data /secure/path/student_thriving.csv --fold
 
 To generate an *exploratory, full-sample* SHAP plot, append `--shap`. This
 plot explains a fitted model; it is **not** an out-of-sample performance metric
-or a causal estimate. Results go to `results/cross_validation_metrics.csv`,
+or a causal estimate. Results go to `results/cross_validation_metrics.csv` and `results/fold_level_metrics.csv`,
 `results/run_metadata.json`, and optionally `results/figures/shap_summary.png`.
 
 ## Benchmark specifications
@@ -59,8 +59,7 @@ or a causal estimate. Results go to `results/cross_validation_metrics.csv`,
 **Caution:** A random split is insufficient if the same student, instructor,
 institution, or cohort appears on both sides of a fold. Outer ten-fold CV is
 not a test of prediction at a new campus or in a future academic year.
-The comparison is not nested hyperparameter optimization across all models;
-only ElasticNetCV includes automatic inner tuning here.
+The comparison is not nested hyperparameter optimization across all models. ElasticNetCV uses inner training CV only for ordinary KFold. For group-disjoint CV, the pipeline instead uses a documented fixed-penalty ElasticNet, avoiding ungrouped inner-model selection; future work can add explicitly grouped nested tuning.
 
 ## Reporting checklist
 
@@ -69,3 +68,14 @@ target scoring, missingness, actual category labels, preprocessing, group
 structure, benchmark code version, fold-level uncertainty, baseline comparison,
 and limitations. Report SHAP with measurement and dependence caveats.
 Do not reuse historical values without matching artifacts.
+
+
+## Clearly labeled synthetic demonstration
+
+Run `python -m examples.synthetic_demo` and optionally add `--shap`.
+Outputs are hypothetical and written under ignored `demo_outputs/`.
+These test computational methods, not actual educational findings.
+
+The `src/policy_diagnostics.py` utility reports aggregate out-of-fold
+subgroup errors while suppressing any subgroup smaller than 20. Such
+diagnostics do not establish model fairness or causal intervention effects.

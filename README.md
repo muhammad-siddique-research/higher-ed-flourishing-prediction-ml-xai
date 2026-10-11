@@ -6,7 +6,7 @@
 ![Python](https://img.shields.io/badge/Python-3.11%2B-3776AB)
 ![Research status](https://img.shields.io/badge/Evidence%20status-evaluation%20pending-lightgrey)
 
-**An open research architecture connecting psychosocial determinants of undergraduate flourishing with transparent predictive modeling and institutionally responsible student-success policy.**
+**Predicting and explaining undergraduate flourishing (Thriving Quotient) using regularized regression, gradient-boosted decision trees (XGBoost/LightGBM), and Tree SHAP interpretability—with transparent validation and responsible educational policy translation.**
 
 This project combines theoretically informed student-success research with reproducible scikit-learn pipelines and exploratory explainable AI (XAI). Its central contribution **at this stage** is a documented and testable workflow—not a publicly validated model or an established causal effect.
 
@@ -35,6 +35,43 @@ Student flourishing cannot be responsibly reduced to a ranking or algorithmic la
 4. **Policy translation:** governance, accessibility, meaningful stakeholder engagement, and monitored implementation.
 
 The theoretical framing draws on [Tinto (1975)](https://doi.org/10.3102/00346543045001089), [Astin (1984)](docs/RESEARCH_DESIGN.md), and [Ryan and Deci (2000)](https://doi.org/10.1037/0003-066X.55.1.68). Feature-level explanation is informed by [Lundberg and Lee (2017)](https://arxiv.org/abs/1705.07874).
+
+## Executable research demonstration | Explicitly synthetic data
+
+The project now contains an executable demonstration of the full
+**mean-only baseline → regularized ElasticNet → Random Forest → XGBoost →
+LightGBM** model comparison. It generates 240 *hypothetical* student records
+assigned to 12 *hypothetical* institutions and evaluates them with
+**group-disjoint cross-validation**. An optional XGBoost Tree SHAP figure
+shows how the fitted example model attributes its synthetic predictions.
+
+```bash
+python -m examples.synthetic_demo
+python -m examples.synthetic_demo --shap
+```
+
+**All generated results and figures are marked SYNTHETIC and are not
+evidence about actual students or empirical model performance.**
+The outputs are stored locally in the git-ignored `demo_outputs/` directory.
+
+Read the [Model Card](docs/MODEL_CARD.md),
+[education policy brief](docs/EDUCATION_POLICY_BRIEF.md),
+[research-validation checklist](docs/VALIDATION_CHECKLIST.md) and
+[privacy-conscious subgroup diagnostics](src/policy_diagnostics.py).
+
+## Research-to-policy workflow
+
+```mermaid
+flowchart TD
+  A["Authorized student research data"] --> B["Validate instrument, schema, and permissions"]
+  B --> C["Training-fold preprocessing"]
+  C --> D["Mean baseline + regularized regression + boosted trees"]
+  D --> E["Held-out fold R², RMSE, and MAE"]
+  D --> F["Tree SHAP attribution"]
+  E --> G["Equity and external validity review"]
+  F --> G
+  G --> H["Separately evaluated student-support policy"]
+```
 
 ## Model architecture
 
@@ -98,7 +135,7 @@ python -m src.train_and_evaluate --data /secure/path/student_thriving.csv --grou
 python -m src.train_and_evaluate --data /secure/path/student_thriving.csv --shap
 ```
 
-The script generates aggregate results under `results/`, which is ignored by Git. It deliberately fails with a clear message when study data are unavailable; it **never creates fabricated real-data metrics**. Automated CI tests use synthetically generated records only, and must not be cited as empirical model validation.
+The script generates aggregate results under `results/`, which is ignored by Git. It deliberately fails when study data are unavailable; it **never creates fabricated real-data metrics**. Authorized-data experiments now include **fold-level** scores, and grouped analysis avoids ungrouped inner penalty tuning. Automated CI tests use synthetically generated records only, and must not be cited as empirical model validation.
 
 For instructions and research standards, see [Reproducibility](docs/REPRODUCIBILITY.md) and [Data Access](data/README.md).
 
@@ -116,7 +153,7 @@ The dashboard explains the available evidence and allows users to visualize **hy
 - **Generalizability:** institution/cohort and time-shift validation are necessary before applying models beyond the original sample.
 - **Decision integrity:** no admissions, financial-aid, counseling, academic-probation, or support eligibility decisions from this prototype.
 
-Read [Research Design](docs/RESEARCH_DESIGN.md) and [Data Governance](docs/DATA_GOVERNANCE.md).
+Read [Research Design](docs/RESEARCH_DESIGN.md), [Data Governance](docs/DATA_GOVERNANCE.md), [Model Card](docs/MODEL_CARD.md), and [Education Policy Brief](docs/EDUCATION_POLICY_BRIEF.md).
 
 ## Repository navigation
 
@@ -130,6 +167,11 @@ Read [Research Design](docs/RESEARCH_DESIGN.md) and [Data Governance](docs/DATA_
 ├── tests/test_workflow.py           Synthetic-only integrity tests
 ├── .github/workflows/ci.yml         Automated CI
 ├── requirements.txt                 Environment dependencies
+├── examples/synthetic_demo.py         Explicitly simulated full ML/XAI demonstration
+├── src/policy_diagnostics.py         OOF aggregated errors with suppression
+├── docs/MODEL_CARD.md                Validity and intended-use boundaries
+├── docs/EDUCATION_POLICY_BRIEF.md    Educational policy translation
+├── docs/VALIDATION_CHECKLIST.md     Publication-readiness rubric
 ├── CITATION.cff                      Software citation metadata
 └── LICENSE                           MIT license for repository code
 ```

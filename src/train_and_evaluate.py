@@ -15,7 +15,7 @@ from sklearn.compose import ColumnTransformer
 from sklearn.dummy import DummyRegressor
 from sklearn.ensemble import RandomForestRegressor
 from sklearn.impute import SimpleImputer
-from sklearn.linear_model import ElasticNetCV
+from sklearn.linear_model import ElasticNet, ElasticNetCV
 from sklearn.model_selection import GroupKFold, KFold, cross_validate
 from sklearn.pipeline import Pipeline
 from sklearn.preprocessing import OneHotEncoder, StandardScaler
@@ -126,7 +126,16 @@ def run_benchmarks(
         cv = KFold(n_splits=folds, shuffle=True, random_state=seed)
     X, y = clean[FEATURES], clean[TARGET]
     candidates = make_models(seed) if models is None else models
+    # Group-aware outer folds require group-aware inner selection, which
+    # ElasticNetCV does not receive through this interface. Avoid leakage by
+    # using a documented fixed-penalty ElasticNet for grouped experiments.
+    if group_column and models is None:
+        candidates.pop("ElasticNetCV")
+        candidates["ElasticNet (fixed; group-safe)"] = ElasticNet(
+            alpha=0.10, l1_ratio=0.5, max_iter=10000
+        )
     rows = []
+    fold_rows = []
     for name, estimator in candidates.items():
         pipeline = Pipeline([
             ("prep", get_preprocessor()),
@@ -143,6 +152,11 @@ def run_benchmarks(
         r2 = metrics["test_r2"]
         rmse = -metrics["test_rmse"]
         mae = -metrics["test_mae"]
+        fold_rows.extend({
+            "model": name, "fold": j,
+            "r2": float(r2[j]), "rmse": float(rmse[j]),
+            "mae": float(mae[j]),
+        } for j in range(folds))
         rows.append({
             "model": name,
             "n_records": len(clean),
@@ -154,7 +168,9 @@ def run_benchmarks(
             "mae_mean": float(np.mean(mae)),
             "mae_sd": float(np.std(mae, ddof=1)),
         })
-    return pd.DataFrame(rows).sort_values("rmse_mean").reset_index(drop=True)
+    table = pd.DataFrame(rows).sort_values("rmse_mean").reset_index(drop=True)
+    table.attrs["fold_metrics"] = pd.DataFrame(fold_rows)
+    return table
 
 
 def run_shap_explanation(df: pd.DataFrame, output_dir: Path) -> Path:
@@ -206,13 +222,21 @@ def main() -> None:
     results = run_benchmarks(raw, folds=args.folds, group_column=args.group_column)
     args.output_dir.mkdir(parents=True, exist_ok=True)
     results.to_csv(args.output_dir / "cross_validation_metrics.csv", index=False)
+    results.attrs["fold_metrics"].to_csv(
+        args.output_dir / "fold_level_metrics.csv", index=False
+    )
     provenance = {
-        "dataset_path": str(args.data),
+        "dataset_filename_only": args.data.name,
+        "dataset_supplied_by_researcher": True,
         "row_count": int(len(raw)),
         "folds": args.folds,
         "seed": SEED,
         "validation": "group-disjoint GroupKFold" if args.group_column else "random KFold",
         "group_column": args.group_column,
+        "regularization": (
+            "fixed-penalty ElasticNet for grouped folds"
+            if args.group_column else "ElasticNetCV tuned within training folds"
+        ),
         "scoring": ["r2", "rmse", "mae"],
         "note": "Associational prediction only; outputs do not establish causal effects.",
     }

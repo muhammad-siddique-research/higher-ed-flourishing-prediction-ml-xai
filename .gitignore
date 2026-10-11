@@ -229,3 +229,6 @@ models/
 .env
 .env.*
 !.env.example
+
+# Synthetic demo results must not be published as student outcomes
+demo_outputs/

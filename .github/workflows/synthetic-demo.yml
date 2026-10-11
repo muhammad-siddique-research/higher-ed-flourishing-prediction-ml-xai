@@ -3,7 +3,16 @@ name: Synthetic ML and XAI end-to-end demonstration
 on:
   push:
     branches: [main]
+    paths:
+      - "examples/**"
+      - "src/**"
+      - "requirements.txt"
+      - ".github/workflows/synthetic-demo.yml"
   workflow_dispatch:
+
+# Permission used only to publish clearly labeled, synthetic-only figures.
+permissions:
+  contents: write
 
 jobs:
   synthetic-experiment:
@@ -38,6 +47,22 @@ jobs:
           assert (p/"SYNTHETIC_SHAP"/"shap_summary.png").stat().st_size>10000
           print("Validated five model comparisons and synthetic SHAP.")
           PY
+      - name: Publish verified synthetic figures in repository
+        run: |
+          mkdir -p docs/figures
+          cp demo_outputs/SYNTHETIC_models.png docs/figures/SYNTHETIC_model_comparison.png
+          cp demo_outputs/SYNTHETIC_SHAP/shap_summary.png docs/figures/SYNTHETIC_tree_shap.png
+          cp demo_outputs/SYNTHETIC_model_metrics.csv docs/figures/SYNTHETIC_model_metrics.csv
+          cp demo_outputs/SYNTHETIC_fold_metrics.csv docs/figures/SYNTHETIC_fold_metrics.csv
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add docs/figures/SYNTHETIC_model_comparison.png docs/figures/SYNTHETIC_tree_shap.png docs/figures/SYNTHETIC_model_metrics.csv docs/figures/SYNTHETIC_fold_metrics.csv
+          if git diff --cached --quiet; then
+            echo "Synthetic figures already current."
+          else
+            git commit -m "docs: publish generated synthetic ML and SHAP figures [skip ci]"
+            git push origin HEAD:main
+          fi
       - name: Upload clearly labeled synthetic research artifacts
         uses: actions/upload-artifact@v4
         with:

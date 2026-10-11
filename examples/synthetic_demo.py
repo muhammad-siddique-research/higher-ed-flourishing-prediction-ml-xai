@@ -68,7 +68,7 @@ def run_demo(output_dir: Path, n: int = 240, seed: int = 42, shap: bool = False)
     (output_dir / "SYNTHETIC_manifest.json").write_text(
         json.dumps(manifest, indent=2), encoding="utf-8")
     if shap:
-        dest = run_shap_explanation(synthetic, output_dir / "SYNTHETIC_SHAP")
+        dest = run_shap_explanation(synthetic, output_dir / "SYNTHETIC_SHAP", label=NOTICE)
         print("Synthetic feature attribution:", dest)
     print(NOTICE)
     print(scores.to_string(index=False))

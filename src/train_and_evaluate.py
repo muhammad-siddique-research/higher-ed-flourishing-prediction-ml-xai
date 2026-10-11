@@ -173,7 +173,7 @@ def run_benchmarks(
     return table
 
 
-def run_shap_explanation(df: pd.DataFrame, output_dir: Path) -> Path:
+def run_shap_explanation(df: pd.DataFrame, output_dir: Path, *, label: str | None = None) -> Path:
     """Exploratory full-sample XGBoost attribution, NOT a causal effect."""
     import matplotlib
     matplotlib.use("Agg")
@@ -197,7 +197,16 @@ def run_shap_explanation(df: pd.DataFrame, output_dir: Path) -> Path:
         values, matrix, feature_names=prep.get_feature_names_out(),
         show=False, max_display=15,
     )
-    plt.tight_layout()
+    if label:
+        fig = plt.gcf()
+        fig.tight_layout(rect=[0, 0.075, 1, 1])
+        fig.text(
+            0.50, 0.018, label,
+            ha="center", va="bottom", color="#A12626",
+            fontsize=8, fontweight="bold",
+        )
+    else:
+        plt.tight_layout()
     plt.savefig(destination, dpi=180, bbox_inches="tight")
     plt.close("all")
     return destination

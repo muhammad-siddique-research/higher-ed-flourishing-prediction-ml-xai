@@ -1,6 +1,7 @@
 # Student Flourishing in Higher Education
 ### Explainable Machine Learning · Educational Research · Responsible Policy
 
+[![Executable SYNTHETIC ML/XAI demo](https://github.com/muhammad-siddique-research/higher-ed-flourishing-prediction-ml-xai/actions/workflows/synthetic-demo.yml/badge.svg)](https://github.com/muhammad-siddique-research/higher-ed-flourishing-prediction-ml-xai/actions/workflows/synthetic-demo.yml)
 [![CI: synthetic-data tests](https://github.com/muhammad-siddique-research/higher-ed-flourishing-prediction-ml-xai/actions/workflows/ci.yml/badge.svg)](https://github.com/muhammad-siddique-research/higher-ed-flourishing-prediction-ml-xai/actions/workflows/ci.yml)
 [![License: MIT](https://img.shields.io/badge/Code%20license-MIT-blue.svg)](LICENSE)
 ![Python](https://img.shields.io/badge/Python-3.11%2B-3776AB)
@@ -49,6 +50,8 @@ shows how the fitted example model attributes its synthetic predictions.
 python -m examples.synthetic_demo
 python -m examples.synthetic_demo --shap
 ```
+
+A separate [GitHub Actions demonstration workflow](.github/workflows/synthetic-demo.yml) executes the example with Tree SHAP and publishes a downloadable, explicitly synthetic research artifact for inspection.
 
 **All generated results and figures are marked SYNTHETIC and are not
 evidence about actual students or empirical model performance.**

@@ -1,0 +1,47 @@
+name: Synthetic ML and XAI end-to-end demonstration
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  synthetic-experiment:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: pip
+      - name: Install requirements
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install -r requirements.txt
+      - name: Execute synthetic benchmark with Tree SHAP
+        run: python -m examples.synthetic_demo --shap --n 240
+      - name: Verify synthetic-only artifact labels and outputs
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          import pandas as pd
+          import json
+          p=Path("demo_outputs")
+          scores=pd.read_csv(p/"SYNTHETIC_model_metrics.csv")
+          assert len(scores)==5, "Expected baseline plus four regressors"
+          assert set(scores["provenance"])=={"SYNTHETIC_ONLY"}
+          assert len(pd.read_csv(p/"SYNTHETIC_fold_metrics.csv"))==15
+          manifest=json.loads((p/"SYNTHETIC_manifest.json").read_text())
+          assert "SYNTHETIC" in manifest["provenance"]
+          assert (p/"SYNTHETIC_models.png").stat().st_size>10000
+          assert (p/"SYNTHETIC_SHAP"/"shap_summary.png").stat().st_size>10000
+          print("Validated five model comparisons and synthetic SHAP.")
+          PY
+      - name: Upload clearly labeled synthetic research artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: SYNTHETIC_ONLY_Flourishing_ML_XAI_Demonstration
+          path: demo_outputs/
+          if-no-files-found: error
+          retention-days: 30

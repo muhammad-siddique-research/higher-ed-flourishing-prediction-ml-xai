@@ -55,6 +55,50 @@ with overview:
         "and **data governance** documents for analysis and decision boundaries."
     )
 
+    st.markdown("---")
+    st.subheader("Reproducible ML and Tree SHAP visualizations")
+    st.caption(
+        "SYNTHETIC-ONLY RESEARCH DEMONSTRATION: 240 mathematically generated "
+        "records across 12 fictitious campuses. These are not results from "
+        "actual undergraduates or an approved institutional scoring model."
+    )
+    figures = ROOT / "docs" / "figures"
+    model_img = figures / "SYNTHETIC_model_comparison.png"
+    shap_img = figures / "SYNTHETIC_tree_shap.png"
+    metric_file = figures / "SYNTHETIC_model_metrics.csv"
+    if model_img.is_file():
+        st.image(
+            str(model_img),
+            caption="Synthetic out-of-group RMSE: ElasticNet, Random Forest, "
+                    "XGBoost, LightGBM, and mean-only baseline.",
+            use_container_width=True,
+        )
+    else:
+        st.info("The automated research demonstration has not yet published its plot.")
+    if metric_file.is_file():
+        metrics = pd.read_csv(metric_file)
+        st.dataframe(
+            metrics[["model", "r2_mean", "rmse_mean", "mae_mean"]]
+            .rename(columns={
+                "model": "Synthetic model", "r2_mean": "R²",
+                "rmse_mean": "RMSE", "mae_mean": "MAE",
+            }).round(3),
+            use_container_width=True, hide_index=True,
+        )
+    if shap_img.is_file():
+        st.image(
+            str(shap_img),
+            caption="Synthetic XGBoost Tree SHAP on a full-sample fit; "
+                    "attribution is not causation or policy effectiveness.",
+            use_container_width=True,
+        )
+    st.caption(
+        "Methodological caveat: these mathematical demonstration results "
+        "cannot verify psychometric constructs, external validity or student "
+        "outcomes. Research and policy decisions require authorized empirical evidence."
+    )
+
+
 with scenario:
     st.subheader("Illustrative perception profile")
     st.caption(

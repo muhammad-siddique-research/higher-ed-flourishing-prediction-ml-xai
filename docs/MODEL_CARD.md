@@ -3,6 +3,20 @@
 **Status:** Public research architecture. Software functionality is testable;
 predictive performance on real undergraduate data **has not been independently verified**.
 
+## Evidence tiers
+
+- **Tier 1: actual manuscript-reported study.** A real undergraduate
+  survey (N=156, complete-case OLS n=152) reports in-sample regression
+  results, now summarized and algebraically audited in
+  [EMPIRICAL_EVIDENCE.md](EMPIRICAL_EVIDENCE.md). The original
+  participant-level data have not been independently re-analyzed.
+- **Tier 2: executable synthetic modeling.** Five ML benchmarks and Tree
+  SHAP run on mathematical simulations, never presented as genuine
+  student records or empirical validation.
+- **Tier 3: planned authorized empirical ML validation.** Restricted
+  original data, instrument documentation, codebook verification, and
+  external validation remain prerequisites for real-world prediction.
+
 ## Research objective and context
 
 Explore whether an undergraduate Thriving Quotient (TQ) composite can be

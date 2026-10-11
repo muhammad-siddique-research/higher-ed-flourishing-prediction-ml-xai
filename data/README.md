@@ -24,3 +24,31 @@ non-predictor grouping column (e.g., `STUDENT_ID`) can be provided using
 Do **not** upload raw identifiable student records, free-text responses,
 private survey exports, or individual-level predictions to GitHub. See
 [Data Governance](../docs/DATA_GOVERNANCE.md).
+
+## Empirical study to pipeline variable crosswalk (verification pending)
+
+The author's 30-page manuscript presents a primary three-predictor
+regression with Thriving Quotient (`TQ_MEAN`) as the target,
+community (`SCOMM`), institutional integrity (`INTEGRITY`),
+and spirituality (`SPIR`). The manuscript's appendix also describes
+SPSS-style fields `TUT` (tuition value), `FIT`, `F-GEN`,
+`GEND`, and `FM-INC`; whereas the expanded ML pipeline currently
+expects `TUITION`, `FIT`, `FIRSTGEN`, `GENDER`,
+and `FAMINCOME`.
+
+**These are proposed name mappings—not confirmed original CSV headers.**
+Inspect the actual restricted SPSS/CSV codebook before renaming columns,
+especially whether variable values and missing-category codes are aligned.
+A label such as `Spirituality` must not automatically be equated with
+secular purpose without reviewing original items and construct validity.
+
+The source draft reports `N=156`, complete-case OLS `n=152`;
+correlation matrices rely on pairwise-valid samples. Neither a
+real-data XGBoost result nor a LightGBM test has been independently
+confirmed from the manuscript.
+
+The econometric companion runs on **only four required columns**
+(`TQ_MEAN`, `SCOMM`, `INTEGRITY`, `SPIR`) after authorized
+data access. The more expansive machine-learning pipeline expects all
+nine named fields and cannot be described as validated on the same
+original sample until that source-data specification is checked.

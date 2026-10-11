@@ -1,6 +1,19 @@
 # Visualization provenance
 
-All assets in this folder are **synthetic examples**, automatically generated
+## Two distinct evidence categories
+
+**Reported real-world study:** SVGs named `REPORTED_*` visualize
+coefficients and correlations transcribed from the author's actual survey
+draft (N=156, OLS n=152). `DERIVED_unique_explanatory_contributions.svg`
+is an algebraic reconstruction from those reported summary statistics.
+None requires or reproduces the restricted participant-level CSV.
+See [Real-study evidence](../EMPIRICAL_EVIDENCE.md).
+
+**Executable synthetic ML/XAI demonstration:** Files beginning with
+`SYNTHETIC_` are mathematical simulations and must not be interpreted
+as observed student outcomes, causal effects or deployed model performance.
+
+All **synthetic** figures below were automatically generated
 by [the executable demonstration](../../examples/synthetic_demo.py) through
 [the GitHub Actions workflow](../../.github/workflows/synthetic-demo.yml).
 

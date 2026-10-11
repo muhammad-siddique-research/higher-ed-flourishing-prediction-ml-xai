@@ -1,0 +1,159 @@
+{
+  "source": {
+    "type": "author_supplied_manuscript_summary",
+    "title": "Predicting Undergraduate Students’ Thriving: An Empirical Econometric and Psychosocial Investigation in Higher Education",
+    "authors": [
+      "Muhammad Siddique",
+      "Chad Briggs"
+    ],
+    "status": "rough draft; empirical findings reported, NOT independently replicated from participant records",
+    "data_access": "underlying deidentified participant-level records not provided",
+    "study": "single-site, cross-sectional undergraduate survey; private university in the US Midwest",
+    "notice": "The repository reproduces analysis from author-supplied aggregate results. These are reported real-study statistics, not re-estimates from original microdata."
+  },
+  "sample": {
+    "survey_n": 156,
+    "complete_case_ols_n": 152,
+    "predictors": 3,
+    "model_df_residual": 148
+  },
+  "descriptives": [
+    {
+      "name": "Thriving Quotient",
+      "code": "TQ_MEAN",
+      "n": 156,
+      "mean": 4.65,
+      "sd": 0.51,
+      "min": 3.29,
+      "max": 6,
+      "skew": -0.16
+    },
+    {
+      "name": "Sense of community",
+      "code": "SCOMM",
+      "n": 156,
+      "mean": 4.74,
+      "sd": 0.75,
+      "min": 2.25,
+      "max": 6,
+      "skew": -0.42
+    },
+    {
+      "name": "Institutional integrity",
+      "code": "INTEGRITY",
+      "n": 152,
+      "mean": 4.58,
+      "sd": 0.88,
+      "min": 2,
+      "max": 6,
+      "skew": -0.6
+    },
+    {
+      "name": "Spirituality/purpose",
+      "code": "SPIR",
+      "n": 154,
+      "mean": 5.2,
+      "sd": 0.85,
+      "min": 3,
+      "max": 6,
+      "skew": -0.98
+    }
+  ],
+  "correlation_order": [
+    "TQ_MEAN",
+    "SCOMM",
+    "INTEGRITY",
+    "SPIR"
+  ],
+  "correlation_pairwise": [
+    [
+      1,
+      0.639,
+      0.385,
+      0.416
+    ],
+    [
+      0.639,
+      1,
+      0.629,
+      0.422
+    ],
+    [
+      0.385,
+      0.629,
+      1,
+      0.351
+    ],
+    [
+      0.416,
+      0.422,
+      0.351,
+      1
+    ]
+  ],
+  "model": {
+    "model": "simultaneous complete-case OLS",
+    "R2": 0.436,
+    "adjusted_R2": 0.424,
+    "F": 38.11,
+    "df_model": 3,
+    "df_residual": 148,
+    "durbin_watson_reported": 2.21
+  },
+  "coefficients": [
+    {
+      "variable": "Intercept",
+      "B": 2.293,
+      "SE": 0.238,
+      "standardized_beta": null,
+      "t": 9.63,
+      "p_reported": "< .001",
+      "CI95": [
+        1.823,
+        2.764
+      ]
+    },
+    {
+      "variable": "SCOMM",
+      "B": 0.405,
+      "SE": 0.057,
+      "standardized_beta": 0.592,
+      "t": 7.11,
+      "p_reported": "< .001",
+      "CI95": [
+        0.293,
+        0.518
+      ]
+    },
+    {
+      "variable": "INTEGRITY",
+      "B": -0.03,
+      "SE": 0.047,
+      "standardized_beta": -0.051,
+      "t": -0.63,
+      "p_reported": ".527",
+      "CI95": [
+        -0.122,
+        0.063
+      ]
+    },
+    {
+      "variable": "SPIR",
+      "B": 0.11,
+      "SE": 0.042,
+      "standardized_beta": 0.182,
+      "t": 2.63,
+      "p_reported": ".009",
+      "CI95": [
+        0.027,
+        0.193
+      ]
+    }
+  ],
+  "scope": [
+    "Reported B, CI, beta and p are transcribed from draft tables; do not call them re-estimated.",
+    "The correlation matrix used pairwise valid N=152–156; reconstructed VIF and standardized coefficient checks are approximate.",
+    "Differences between nonsignificant and significant slopes do not establish mediation or causal pathways.",
+    "No HC3, heteroskedasticity test, influence diagnostics, MICE, causal IV, SEM, subgroup effects or out-of-sample validation can be estimated from these aggregates alone."
+  ]
+}

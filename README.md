@@ -9,9 +9,92 @@
 
 **Predicting and explaining undergraduate flourishing (Thriving Quotient) using regularized regression, gradient-boosted decision trees (XGBoost/LightGBM), and Tree SHAP interpretability—with transparent validation and responsible educational policy translation.**
 
-This project combines theoretically informed student-success research with reproducible scikit-learn pipelines and exploratory explainable AI (XAI). Its central contribution **at this stage** is a documented and testable workflow—not a publicly validated model or an established causal effect.
+This repository connects an **actual reported undergraduate survey study** with reproducible aggregate-level econometric audits, an authorized-data robustness implementation, and an exploratory scikit-learn/XAI research pipeline. Its computational demonstrations remain distinct from original student-data validation and causal identification.
 
 > **Research integrity statement:** The source student-level data, model output files, and independent econometric replication materials are **not available in this public repository**. Historical performance and causal claims in a prior README have been preserved in [an explicitly unverified archive](docs/LEGACY_RESULTS_UNVERIFIED.md). The Streamlit application is a **construct-exploration and policy-governance lab**, not a fitted prediction service.
+
+## Real-world undergraduate study | Reported empirical evidence
+
+**Source:** Author-supplied 30-page research draft describing a
+**single-site undergraduate survey (N = 156; complete-case OLS n = 152)**.
+The underlying participant-level dataset and original model-output files
+have **not** been supplied. The real-study visualizations below display
+manuscript-reported statistics, *not* re-estimated microdata or validated
+out-of-sample machine-learning predictions.
+
+<details>
+<summary><b>Evidence status: reported results, reproducibly audited from aggregates</b></summary>
+
+- Manuscript: *Predicting Undergraduate Students' Thriving: An Empirical
+  Econometric and Psychosocial Investigation in Higher Education*
+  (Siddique & Briggs, research draft).
+- Original respondent records are not publicly released and have not been
+  independently audited.
+- Regression-model consistency and additional partial R² and VIF
+  calculations can be reproduced from the reported tables.
+- Previously claimed XGBoost/LightGBM accuracy statistics remain
+  **unverified** on the original student data.
+
+</details>
+
+| Study evidence | Reported or calculated result |
+|---|---|
+| Participants | 156 surveyed; 152 complete-case OLS observations |
+| Model | Thriving Quotient ~ community + integrity + spirituality |
+| In-sample fit | **R² = .436**, adjusted **R² = .424** |
+| Omnibus test | **F(3, 148) = 38.11, p < .001** |
+| Community association | **B = .405, 95% CI [.293, .518]** |
+| Integrity association | B = −.030, 95% CI [−.122, .063] |
+| Spirituality/purpose association | B = .110, 95% CI [.027, .193] |
+
+### Real-study regression coefficients and confidence intervals
+
+![OLS regression coefficient estimates and confidence intervals reported in the undergraduate flourishing research draft](docs/figures/REPORTED_ols_coefficients.svg)
+
+*Source: reported multivariable OLS table from the author's research draft.
+Confidence intervals are descriptive of estimated conditional associations,
+not effects of interventions.*
+
+### Empirical correlations among flourishing constructs
+
+![Observed study correlation matrix transcribed from the manuscript's summary table](docs/figures/REPORTED_correlations.svg)
+
+*Source: reported pairwise correlation matrix (N varying from 152–156).*
+
+### Advanced econometric insight: uniquely explained variation
+
+![Derived model contribution using reported omnibus F and predictor t statistics](docs/figures/DERIVED_unique_explanatory_contributions.svg)
+
+*Derived aggregate-data audit—not an original-data re-estimation. Community
+has the largest drop-one-predictor incremental R² (approximately .193),
+followed by spirituality (.026) and institutional integrity (.002).
+These quantities are not causal contributions.*
+
+**Reproduce the audit, no private dataset required:**
+
+```bash
+python -m src.reported_evidence_audit
+```
+
+**Advance to new econometric inference after authorized data access:**
+
+```bash
+python -m src.real_data_econometrics --data /secure/path/real_study.csv \
+  --output-dir results/real_study --bootstrap 1000
+```
+
+The new runner implements **HC3-robust OLS**, the **Breusch–Pagan test**,
+**Ramsey RESET**, **VIF**, **Cook's distance**, **nested model ΔR²**, and
+**case-resampling confidence intervals**. These methods are *implemented*,
+but their new empirical results are **not yet available**. The missing
+participant data cannot be reconstructed reliably from a 30-page summary.
+
+**Explore:** [Full reported-study analysis](docs/EMPIRICAL_EVIDENCE.md) ·
+[Advanced econometric protocol](docs/ADVANCED_ECONOMETRICS.md) ·
+[Research-to-policy recommendations](docs/EDUCATION_POLICY_BRIEF.md) ·
+[Restricted data and codebook crosswalk](data/README.md)
+
+---
 
 ## Research at a glance
 
@@ -24,7 +107,7 @@ This project combines theoretically informed student-success research with repro
 | **Validation** | Train-fold preprocessing, 10-fold R² / RMSE / MAE; optional group-disjoint CV |
 | **Explainability** | Exploratory Tree SHAP; model attribution **does not imply causality** |
 | **Policy focus** | Equitable student support, transparent evidence standards, privacy, and governance |
-| **Current evidence** | Source code and synthetic-only CI tests; real-data estimates need verification |
+| **Current evidence** | Real-study **manuscript-reported** OLS aggregates and derived audit, plus synthetic-only ML/XAI demonstrations; original-data replication pending |
 
 ## Why this research matters
 
@@ -208,7 +291,12 @@ Read [Research Design](docs/RESEARCH_DESIGN.md), [Data Governance](docs/DATA_GOV
 
 ```text
 .
-├── README.md                        Project and evidence overview
+├── README.md                        Flagship evidence and ML/XAI overview
+├── evidence/manuscript_summary.json Real-study aggregates (not raw data)
+├── src/reported_evidence_audit.py   Reconstructed inferential diagnostics
+├── src/real_data_econometrics.py    HC3, bootstrap, BP, RESET, nested models
+├── docs/EMPIRICAL_EVIDENCE.md       Reported real-study results and charts
+├── docs/ADVANCED_ECONOMETRICS.md    Econometric methodology and caveats
 ├── app/streamlit_app.py             Research and policy exploration UI
 ├── src/train_and_evaluate.py        Validated benchmark + optional SHAP
 ├── data/README.md                   Restricted data contract
@@ -240,6 +328,8 @@ Use [CITATION.cff](CITATION.cff) for this software repository. Cite individual e
 
 - [x] Implement baseline + four model families, train-fold transformations, optional SHAP
 - [x] Add schema checks, group-aware CV option, ethical policy interface, and synthetic-only CI
+- [x] Attribute and audit reported real-study aggregates, including model consistency and unique contributions
+- [x] Implement an authorized-data econometric robustness runner (HC3, bootstrap, diagnostics)
 - [ ] Secure and document the authorized source dataset and survey instrument
 - [ ] Recompute benchmark tables with reproducible experiment manifests
 - [ ] Validate psychometric scoring, measurement invariance, missingness, and possible leakage

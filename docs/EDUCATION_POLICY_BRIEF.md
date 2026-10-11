@@ -12,6 +12,60 @@ fit and affordability warrant thoughtful investigation. A reproducible
 predictive model may help clarify patterns in *authorized aggregate research*.
 A prediction does not establish which student-support intervention works.
 
+## Empirical signals from the author's actual study
+
+The author-supplied manuscript describes 156 survey respondents at a
+single private Midwestern higher education institution, including
+152 complete cases in the three-predictor OLS.
+
+The reported model explains approximately 43.6% of thriving variance in
+sample (adjusted R² = .424). Sense of community has the largest
+conditional relationship with thriving (B = .405, 95% CI [.293, .518]).
+Spirituality/purpose shows a smaller positive conditional association
+(B = .110, 95% CI [.027, .193]); institutional integrity's conditional
+coefficient is not distinguishable from zero in this model
+(B = −.030, 95% CI [−.122, .063]).
+
+**What this does NOT prove:** an intervention raising a scale score by one
+point raises thriving by the same regression coefficient. The survey
+is cross-sectional, and these are original-manuscript-reported aggregate
+figures, not independently replicated raw-data estimations. The lack
+of a conditional integrity effect does not justify deprioritizing ethical
+leadership or institutional fairness.
+
+### An implementable institutional learning agenda
+
+1. **Co-design an inclusive belonging pilot.** Offer opt-in peer mentoring,
+   faculty check-ins, transition support and accessible learning communities.
+   Invite diverse students to define what meaningful belonging entails.
+2. **Prespecify outcomes.** Track ethically administered flourishing scales,
+   course engagement, students' perceived support, and program accessibility.
+   Avoid turning composite TQ scores into disciplinary risk labels.
+3. **Evaluate effects independently.** If feasible, use randomized invitation
+   or phased rollout designs with appropriate consent and governance; report
+   intent-to-treat outcomes, attrition, subgroup uncertainty and implementation
+   costs. This evaluation is **proposed, not performed** in this repository.
+4. **Maintain integrity and transparency.** Review student-facing commitments,
+   timely services, equitable access, and grievance/feedback mechanisms even
+   if multivariable correlations are not statistically significant.
+5. **Respect religious and nonreligious diversity.** Meaning/purpose programs
+   must be voluntary and inclusive; spirituality variables should not be
+   used to infer beliefs or allocate student services.
+
+### Decision dashboard for senior leadership
+
+| Decision | Evidence available today | Responsible next evidence |
+|---|---|---|
+| Evaluate mentoring | Community strongly correlated with TQ | Controlled pilot and student input |
+| Improve institutional trust | Correlations, no proven mediation | Governance assessment and longitudinal survey |
+| Offer purpose exploration | Conditional correlation only | Voluntary, inclusive student support evaluation |
+| Deploy ML risk scoring | **No validated original-data ML results** | Authorized data, external testing, privacy and equity approval |
+
+See the [real-study empirical audit](EMPIRICAL_EVIDENCE.md) and
+[advanced econometric protocol](ADVANCED_ECONOMETRICS.md). This is a
+framework for learning from evidence, not a recommendation to automate
+consequential student decisions.
+
 ## Evidence chain
 
 | Stage | Required evidence | Practical decision |

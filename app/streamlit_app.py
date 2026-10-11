@@ -24,8 +24,8 @@ st.warning(
     "No individual risk score or intervention recommendation is generated."
 )
 
-overview, scenario, governance = st.tabs([
-    "Research overview", "Explore student-experience dimensions", "Policy & governance",
+overview, empirical, scenario, governance = st.tabs([
+    "Research overview", "Reported empirical study", "Explore student-experience dimensions", "Policy & governance",
 ])
 
 with overview:
@@ -96,6 +96,60 @@ with overview:
         "Methodological caveat: these mathematical demonstration results "
         "cannot verify psychometric constructs, external validity or student "
         "outcomes. Research and policy decisions require authorized empirical evidence."
+    )
+
+
+with empirical:
+    st.subheader("Actual undergraduate survey: published-in-draft aggregates")
+    st.warning(
+        "The reported figures below describe a real, single-site survey "
+        "(N=156; complete-case OLS n=152), transcribed from an author-supplied "
+        "research draft. Original participant-level data are not in this "
+        "repository; estimates have NOT been independently re-estimated "
+        "from raw records, and no intervention effects are claimed."
+    )
+    c1, c2, c3 = st.columns(3)
+    c1.metric("Survey respondents", "156")
+    c2.metric("Complete-case OLS", "152")
+    c3.metric("Reported in-sample R²", "0.436")
+    st.markdown(
+        "**Reported model:** Thriving Quotient as a function of sense "
+        "of community, institutional integrity, and spirituality/purpose. "
+        "Adjusted R² = .424; F(3, 148) = 38.11."
+    )
+    df = pd.DataFrame([
+        {"Predictor": "Sense of community", "B": 0.405,
+         "Lower 95%": 0.293, "Upper 95%": 0.518,
+         "Partial R² (derived)": 0.2546},
+        {"Predictor": "Institutional integrity", "B": -0.030,
+         "Lower 95%": -0.122, "Upper 95%": 0.063,
+         "Partial R² (derived)": 0.0027},
+        {"Predictor": "Spirituality / purpose", "B": 0.110,
+         "Lower 95%": 0.027, "Upper 95%": 0.193,
+         "Partial R² (derived)": 0.0446},
+    ])
+    st.dataframe(df, hide_index=True, use_container_width=True)
+    for filename, caption in [
+        ("REPORTED_ols_coefficients.svg",
+         "Reported complete-case regression coefficients and confidence intervals"),
+        ("REPORTED_correlations.svg",
+         "Reported bivariate correlations from the author's research draft"),
+        ("DERIVED_unique_explanatory_contributions.svg",
+         "Algebraically derived incremental R² — not causal effects"),
+    ]:
+        file_path = ROOT / "docs" / "figures" / filename
+        if file_path.exists():
+            st.image(str(file_path), caption=caption, use_container_width=True)
+    st.info(
+        "Research-to-policy boundary: this single-institution observational "
+        "study motivates testing inclusive mentoring and belonging supports. "
+        "It does not prove those programs work, establish mediation, or "
+        "justify individual student profiling."
+    )
+    st.markdown(
+        "[Review evidence provenance and interpretation on GitHub]"
+        "(https://github.com/muhammad-siddique-research/"
+        "higher-ed-flourishing-prediction-ml-xai/blob/main/docs/EMPIRICAL_EVIDENCE.md)"
     )
 
 

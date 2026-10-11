@@ -1,10 +1,10 @@
-numpy>=1.23.0
-pandas>=2.0.0
-scikit-learn>=1.2.0
-xgboost>=1.7.0
-lightgbm>=3.3.0
-shap>=0.42.0
-matplotlib>=3.7.0
-seaborn>=0.12.0
-streamlit>=1.25.0
-joblib>=1.3.0
+# Research and dashboard runtime; exact environments should be locked for publication.
+numpy>=1.26,<3
+pandas>=2.1,<3
+scipy>=1.11,<2
+scikit-learn>=1.4,<2
+xgboost>=2.0,<4
+lightgbm>=4.0,<5
+shap>=0.46,<1
+matplotlib>=3.8,<4
+streamlit>=1.36,<2

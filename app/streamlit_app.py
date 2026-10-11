@@ -1,42 +1,114 @@
-import streamlit as st
-import numpy as np
+"""Education-policy-oriented exploration of the higher-ed flourishing project.
 
-# Page configuration
+No fitted model or individual-student risk scoring is deployed here.
+"""
+from __future__ import annotations
+
+from pathlib import Path
+
+import pandas as pd
+import streamlit as st
+
 st.set_page_config(
-    page_title="Higher Ed Thriving AI Decision Engine",
+    page_title="Student Flourishing | Research & Policy Lab",
     page_icon="🎓",
-    layout="wide"
+    layout="wide",
 )
 
-st.title("🎓 Undergraduate Thriving Predictor & Decision Engine")
-st.markdown("Inference engine predicting student flourishing (**Thriving Quotient**) from psychosocial and environmental inputs.")
+ROOT = Path(__file__).resolve().parents[1]
+st.title("Student Flourishing in Higher Education")
+st.caption("Explainable ML research architecture · Educational evidence · Responsible policy design")
+st.warning(
+    "Research prototype—not a validated prediction service. The source student-level data, "
+    "fitted model artifact, and independently reproducible performance report are not included. "
+    "No individual risk score or intervention recommendation is generated."
+)
 
-# Layout: 2 Columns for inputs
-col1, col2 = st.columns([1, 1])
+overview, scenario, governance = st.tabs([
+    "Research overview", "Explore student-experience dimensions", "Policy & governance",
+])
 
-with col1:
-    st.subheader("Psychosocial & Relational Inputs")
-    scomm = st.slider("Sense of Community (1.0 - 6.0)", 1.0, 6.0, 4.74, 0.1, help="Interpersonal belonging and peer support")
-    integrity = st.slider("Institutional Integrity (1.0 - 6.0)", 1.0, 6.0, 4.58, 0.1, help="Transparency and mission alignment")
-    spir = st.slider("Spirituality & Purpose (1.0 - 6.0)", 1.0, 6.0, 5.20, 0.1, help="Existential meaning and purpose")
-    fit = st.slider("Perceived Institutional Fit (1.0 - 6.0)", 1.0, 6.0, 4.50, 0.1, help="Alignment with university goals")
+with overview:
+    st.subheader("The research question")
+    st.markdown(
+        "How might sense of community, institutional integrity, meaning and purpose, "
+        "perceived institutional fit, and tuition-value perceptions jointly predict "
+        "undergraduate flourishing—and what evidence is needed before informing policy?"
+    )
+    a, b, c = st.columns(3)
+    a.metric("Candidate ML methods", "4")
+    b.metric("Recommended evaluation", "10-fold CV")
+    c.metric("Validated deployed model", "None")
+    st.markdown(
+        "The repository contains an auditable scikit-learn pipeline with **ElasticNetCV, "
+        "Random Forest, XGBoost, and LightGBM**, plus a mean-only baseline. "
+        "Preprocessing occurs inside each training fold. SHAP plots can be created from "
+        "authorized study data, but feature attribution is **not causal identification**."
+    )
+    st.info(
+        "Model estimates in an earlier project description are archived as unverified historical "
+        "claims. They should not be reused in reports until the original data, estimation "
+        "specifications, and executable results are independently checked."
+    )
+    st.markdown(
+        "See the repository's **README**, **research design**, **reproducibility protocol**, "
+        "and **data governance** documents for analysis and decision boundaries."
+    )
 
-with col2:
-    st.subheader("Demographic & Background Attributes")
-    tuition = st.slider("Tuition Value Perception (1.0 - 6.0)", 1.0, 6.0, 4.00, 0.1, help="Perceived return on educational investment")
-    firstgen = st.selectbox("First-Generation Student Status", [0, 1], format_func=lambda x: "Yes (First-Gen)" if x == 1 else "No (Continuing-Gen)")
-    gender = st.selectbox("Student Gender Identity", [0, 1], format_func=lambda x: "Female" if x == 1 else "Male")
-    famincome = st.selectbox("Family Income Tier", [1, 2, 3, 4, 5], format_func=lambda x: f"Income Bracket {x}")
+with scenario:
+    st.subheader("Illustrative perception profile")
+    st.caption(
+        "Adjust hypothetical scale responses to visualize the research constructs. "
+        "These are NOT observed student data and NOT inputs to a trained model."
+    )
+    left, right = st.columns([1, 1.2])
+    with left:
+        community = st.slider("Sense of community", 1.0, 6.0, 4.0, 0.1)
+        integrity = st.slider("Institutional integrity", 1.0, 6.0, 4.0, 0.1)
+        purpose = st.slider("Meaning and purpose", 1.0, 6.0, 4.0, 0.1)
+        fit = st.slider("Perceived institutional fit", 1.0, 6.0, 4.0, 0.1)
+        tuition = st.slider("Perceived tuition value", 1.0, 6.0, 4.0, 0.1)
+    with right:
+        profile = pd.DataFrame({
+            "Construct": [
+                "Sense of community", "Institutional integrity",
+                "Meaning and purpose", "Institutional fit", "Tuition value",
+            ],
+            "Illustrative response": [community, integrity, purpose, fit, tuition],
+        }).set_index("Construct")
+        st.bar_chart(profile, horizontal=True)
+        st.caption(
+            "The horizontal bars represent hypothetical responses on a 1–6 scale. "
+            "They are not effect sizes, predicted thriving values, or policy thresholds."
+        )
+    st.markdown(
+        "**Responsible use:** The profile can structure discussion of where institutional "
+        "evidence is needed. No learner should be classified, penalized, or assigned services "
+        "from these controls."
+    )
 
-    # Model inference based on econometric parameter estimation
-    predicted_tq = 2.293 + (0.405 * scomm) - (0.030 * integrity) + (0.110 * spir) + (0.040 * fit)
+with governance:
+    st.subheader("Questions a policy-ready study must answer")
+    checks = [
+        "Are the flourishing construct and psychometric measures validated for this population?",
+        "Were learners informed, and is use of student data authorized and privacy-protective?",
+        "Does validation separate the same students, courses, or institutions across folds?",
+        "Does the model generalize across time, departments, and institutions?",
+        "Are errors and calibration assessed across relevant, ethically justifiable groups?",
+        "Do interventions have independent educational effectiveness evidence?",
+        "Is the analysis transparent to students, educators, and governance bodies?",
+    ]
+    for item in checks:
+        st.checkbox(item, value=False, disabled=True)
+    st.caption("Illustrative governance checklist; no completion or certification is implied.")
+    st.markdown(
+        "For institutional decisions, supplement predictive evaluation with stakeholder "
+        "consultation, accessibility review, impact assessment, and appropriately designed "
+        "causal research. Institution-wide aggregates are not a substitute for consent."
+    )
 
-    st.markdown("---")
-    st.metric(label="Predicted Thriving Quotient (TQ Score)", value=f"{predicted_tq:.2f} / 6.00")
-
-    if predicted_tq >= 4.80:
-        st.success("🟢 **Optimal Flourishing Tier:** Strong academic determination, cognitive engagement, and positive perspective.")
-    elif predicted_tq >= 4.10:
-        st.info("🟡 **Moderate Thriving Tier:** Stable baseline; benefits from peer-mentoring and living-learning communities.")
-    else:
-        st.warning("🔴 **Developmental Risk Tier:** Requires proactive advising and targeted relational intervention.")
+st.divider()
+st.caption(
+    "Muhammad Siddique · Higher education research, explainable ML, and responsible policy. "
+    "Open-source research prototype; not an admissions, advising, or student-risk system."
+)

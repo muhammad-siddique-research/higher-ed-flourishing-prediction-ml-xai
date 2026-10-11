@@ -57,6 +57,7 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add docs/figures/SYNTHETIC_model_comparison.png docs/figures/SYNTHETIC_tree_shap.png docs/figures/SYNTHETIC_model_metrics.csv docs/figures/SYNTHETIC_fold_metrics.csv
+          # docs/figures is explicitly unignored in .gitignore.
           if git diff --cached --quiet; then
             echo "Synthetic figures already current."
           else

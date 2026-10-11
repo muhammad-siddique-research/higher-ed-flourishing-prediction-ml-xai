@@ -232,3 +232,7 @@ models/
 
 # Synthetic demo results must not be published as student outcomes
 demo_outputs/
+
+# Public, clearly synthetic research figures are deliberately tracked.
+!/docs/figures/
+!/docs/figures/**

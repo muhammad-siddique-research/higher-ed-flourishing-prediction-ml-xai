@@ -7,10 +7,31 @@
 - Train-only folds, model candidates, evaluation metric computations, and
   optional exploratory XGBoost SHAP generation **when authorized data are supplied**.
 
-This repository does **not** contain the original student-level CSV,
-trained model artifacts, executed performance plots, or an externally validated
-evaluation report. The historical R²/RMSE/MAE figures in an older README
-therefore cannot be reproduced from the current files alone.
+This repository does **not** distribute the original participant-level
+SPSS dataset, trained respondent-level models, or any externally validated
+generalization report. It **does contain original-data aggregate cross-
+validation metrics and aggregate SHAP figures**, obtained from the
+author's private analysis and documented at
+[REAL_DATA_VALIDATION.md](REAL_DATA_VALIDATION.md). The public
+evidence CSVs can be inspected, but the original private data are required
+to rerun their estimators independently. Older, historically unverified
+README figures must not replace the newest aggregate evidence.
+
+## Distinct original-data evidence and synthetic software benchmarks
+
+- **Real, restricted observations:** N=156, complete-case n=152. Original
+  study uses 5x-repeated 5-fold CV with fixed model configurations and
+  held-out Tree SHAP on the first repetition; aggregates and method
+  provenance are in [REAL_DATA_VALIDATION.md](REAL_DATA_VALIDATION.md)
+  and `evidence/REAL_STUDY_*.csv`.
+- **Synthetic CI demonstrations:** The checked-in runnable simulation
+  uses fictitious observations and documents its own hyperparameters
+  and group-disjoint validation. It does not validate the private study.
+- **General authorized-data estimator:** The commands below are a
+  separate implementation whose predictors/partitions may differ from
+  the private original-data study. Running them with new data is
+  **not** a replication of the paper unless the original documented
+  specifications are matched.
 
 ## Setup
 

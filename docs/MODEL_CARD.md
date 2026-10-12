@@ -34,6 +34,17 @@ Research-method demonstration, model benchmarking, scholarly collaboration,
 and transparent discussion of institutional data governance. This repository
 is *not* an operational risk scoring or automated student-support system.
 
+## Original-data analysis versus generic software pipeline
+
+The original-data manuscript analysis compared seven configurations:
+mean-only, OLS, Ridge, ElasticNet, Random Forest, XGBoost, LightGBM.
+It used repeated 5-fold CV (5 repetitions) on n=152 complete cases,
+and first-repetition held-out Tree SHAP. See
+[original-data validation](REAL_DATA_VALIDATION.md). The generic software
+pipeline below is a separate implementation with its own parameter and
+fold settings; its outputs should not be identified as exact replications
+of those private original-data results.
+
 ## Architecture and evaluation
 
 - **Outcome:** Project-described TQ_MEAN, continuous 1–6 scale; original
@@ -56,10 +67,10 @@ is *not* an operational risk scoring or automated student-support system.
 | Evidence category | Current verification |
 |---|---|
 | Data contracts and train-fold preprocessing | Code + synthetic unit tests |
-| Real-data model scores | **Not independently reproduced** |
+| Real-data internal benchmark | Original private survey analyses summarized publicly; metrics from 25-fold CV (n=152) |
 | External validation at other universities | **Not available** |
-| Sensitivity to different survey measures | **Not assessed** |
-| SHAP on the original student dataset | **Not available** |
+| Sensitivity of primary econometrics | HC3, model diagnostics, influence, and exploratory controls documented; psychometric invariance not assessed |
+| SHAP on original study | Held-out first-repetition Tree SHAP aggregate summary available; respondent plots restricted |
 | Causal effects or policy effectiveness | **Not established** |
 | Subgroup-error reporting code | Available, minimum n=20 |
 

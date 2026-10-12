@@ -1,6 +1,6 @@
 cff-version: 1.2.0
-message: "If you use this research software, please cite the repository. Empirical results require separate attribution."
-title: "Student Flourishing in Higher Education: Reproducible ML, XAI, and Policy Research Architecture"
+message: "Cite this software repository when reusing code or aggregate exhibits; the companion manuscript is a working draft, not a published paper."
+title: "The Science of Student Thriving: Econometrics and Explainable AI Analysis — Research Software and Aggregate Evidence"
 type: software
 authors:
   - family-names: Siddique
@@ -13,3 +13,6 @@ keywords:
   - explainable-machine-learning
   - educational-policy
   - reproducible-research
+  - real-data-internal-validation
+  - econometric-robustness
+  - tree-shap

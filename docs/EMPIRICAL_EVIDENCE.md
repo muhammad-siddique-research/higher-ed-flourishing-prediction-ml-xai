@@ -1,4 +1,15 @@
-# Empirical evidence | Undergraduate flourishing in the actual study
+# Historical aggregate audit | Earlier undergraduate flourishing manuscript
+
+> **Superseded evidence status:** This page records the manuscript-summary
+> reconstruction performed **before** the original SPSS dataset was
+> independently reanalyzed. The newest original-data OLS, HC3, 25-fold
+> real-data model comparison and held-out Tree SHAP results are now available
+> in **[Original-data validation and evidence](REAL_DATA_VALIDATION.md)**.
+> Retained for transparency and historical methods tracking. Do **not**
+> interpret statements below about previously unavailable data as the
+> current evidence status of this project.
+
+## Historical summary-only calculations
 
 > **Evidence provenance:** This page summarizes and independently checks
 > numerical *aggregates reported in a researcher-supplied 30-page draft*

@@ -1,0 +1,38 @@
+{
+  "evidence_type": "Restricted original-SPSS survey analyses summarized for public scholarly communication",
+  "manuscript_status": "Revised author manuscript; not asserted published or peer reviewed",
+  "sample": {"survey_n": 156, "complete_case_ols_and_ml_n": 152, "institution_count": 1},
+  "target": "TQ_MEAN",
+  "predictors": ["SCOMM", "INTEGRITY", "SPIR"],
+  "primary_OLS": {
+    "r_squared": 0.4358,
+    "adjusted_r_squared": 0.4244,
+    "f_statistic": 38.11,
+    "df_model": 3,
+    "df_resid": 148,
+    "community_B": 0.405,
+    "community_HC3_95CI": [0.267, 0.543],
+    "spirituality_B": 0.110,
+    "spirituality_HC3_95CI": [0.008, 0.212],
+    "integrity_B": -0.030,
+    "integrity_HC3_95CI": [-0.125, 0.066],
+    "reported_HC3_source": "Revised researcher-supplied manuscript and independent reanalysis cited therein"
+  },
+  "ml_validation": {
+    "method": "RepeatedKFold",
+    "n_splits": 5,
+    "n_repeats": 5,
+    "n_overlapping_holdout_folds": 25,
+    "random_state": 42,
+    "model_configuration": "Fixed exploratory settings; no outcome-driven search",
+    "error_aggregation": "Arithmetic mean of fold RMSE / MAE / R2",
+    "shap": "Out-of-fold observations from first 5-fold repetition, one held-out explanation per participant"
+  },
+  "reproduction_limitations": [
+    "The raw SPSS .sav records are restricted and not stored or linked in this repository.",
+    "Aggregate evidence was independently derived from author-provided private analysis outputs; this repository does not itself reproduce the empirical estimates without authorized original records.",
+    "Repeated folds overlap and are not independent confidence-interval replications.",
+    "No external institutional test, causal identification or prospective policy evaluation.",
+    "Participant-level SHAP and scatterplots are not publicly released."
+  ]
+}

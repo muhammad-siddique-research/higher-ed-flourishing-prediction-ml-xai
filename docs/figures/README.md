@@ -1,8 +1,16 @@
 # Visualization provenance
 
-## Two distinct evidence categories
+## Three clearly separated evidence categories
 
-**Reported real-world study:** SVGs named `REPORTED_*` visualize
+**Restricted original-data reanalysis (public aggregate visuals):**
+`REAL_STUDY_*` SVGs show *only aggregate* cross-validated RMSEs and mean
+absolute SHAP contributions obtained from the original private undergraduate
+survey. See [real-data validation](../REAL_DATA_VALIDATION.md). They
+do not reveal individual survey points or imply external validity.
+
+**Historical summary-only manuscript audit:**
+
+SVGs named `REPORTED_*` visualize
 coefficients and correlations transcribed from the author's actual survey
 draft (N=156, OLS n=152). `DERIVED_unique_explanatory_contributions.svg`
 is an algebraic reconstruction from those reported summary statistics.

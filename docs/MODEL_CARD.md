@@ -1,21 +1,25 @@
-# Model card | Student flourishing and responsible explainable ML
+# Model card | Student flourishing econometrics and explainable predictive modeling
 
-**Status:** Public research architecture. Software functionality is testable;
-predictive performance on real undergraduate data **has not been independently verified**.
+**Status:** Original-data exploratory research results now documented through
+private SPSS reanalysis and [published aggregate evidence](REAL_DATA_VALIDATION.md).
+Cross-validation is internal to one small institutional cohort. **No validated
+student-risk model, causal effect, external transportability, or deployed service.**
 
 ## Evidence tiers
 
-- **Tier 1: actual manuscript-reported study.** A real undergraduate
-  survey (N=156, complete-case OLS n=152) reports in-sample regression
-  results, now summarized and algebraically audited in
-  [EMPIRICAL_EVIDENCE.md](EMPIRICAL_EVIDENCE.md). The original
-  participant-level data have not been independently re-analyzed.
-- **Tier 2: executable synthetic modeling.** Five ML benchmarks and Tree
-  SHAP run on mathematical simulations, never presented as genuine
-  student records or empirical validation.
-- **Tier 3: planned authorized empirical ML validation.** Restricted
-  original data, instrument documentation, codebook verification, and
-  external validation remain prerequisites for real-world prediction.
+- **Actual restricted survey:** N = 156 original cases; n = 152 complete
+  cases. OLS replicated with HC3 sensitivity; seven-model predictive benchmark
+  used 25 matched held-out folds and aggregate withheld-case SHAP. Source
+  participant records are not distributed.
+- **Aggregate public research:** Original-data regression summaries, CV
+  metrics, SHAP feature-importance summary, and publication-safe SVG figures
+  at [REAL_DATA_VALIDATION.md](REAL_DATA_VALIDATION.md).
+- **Synthetic software demonstrations:** Source tests and GitHub Actions
+  show that modeling and SHAP routines execute on generated example data.
+  These results must not be confused with the original survey.
+- **Further external work:** Instrument and fairness assessment, new cohorts
+  and institutions, and prospective educational policy evaluation remain
+  necessary.
 
 ## Research objective and context
 

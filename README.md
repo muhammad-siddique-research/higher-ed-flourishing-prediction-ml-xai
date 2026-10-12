@@ -1,98 +1,65 @@
-# Student Flourishing in Higher Education
-### Explainable Machine Learning · Educational Research · Responsible Policy
+# The Science of Student Thriving: Econometrics and Explainable AI Analysis
+### Real-data econometric evidence · Internal ML validation · Transparent educational policy
 
 [![Executable SYNTHETIC ML/XAI demo](https://github.com/muhammad-siddique-research/higher-ed-flourishing-prediction-ml-xai/actions/workflows/synthetic-demo.yml/badge.svg)](https://github.com/muhammad-siddique-research/higher-ed-flourishing-prediction-ml-xai/actions/workflows/synthetic-demo.yml)
 [![CI: synthetic-data tests](https://github.com/muhammad-siddique-research/higher-ed-flourishing-prediction-ml-xai/actions/workflows/ci.yml/badge.svg)](https://github.com/muhammad-siddique-research/higher-ed-flourishing-prediction-ml-xai/actions/workflows/ci.yml)
 [![License: MIT](https://img.shields.io/badge/Code%20license-MIT-blue.svg)](LICENSE)
 ![Python](https://img.shields.io/badge/Python-3.11%2B-3776AB)
-![Research status](https://img.shields.io/badge/Evidence%20status-evaluation%20pending-lightgrey)
+![Research status](https://img.shields.io/badge/Evidence%20status-original--data%20internal%20validation-blue)
 
-**Predicting and explaining undergraduate flourishing (Thriving Quotient) using regularized regression, gradient-boosted decision trees (XGBoost/LightGBM), and Tree SHAP interpretability—with transparent validation and responsible educational policy translation.**
+**Reanalysis of a real undergraduate survey (N = 156; analytic n = 152)** integrating replicated OLS, HC3-robust inference, XGBoost, Random Forest, LightGBM, regularized regression, and held-out Tree SHAP. The research aims to clarify how community belonging, institutional integrity, and spirituality relate to thriving, without mistaking predictive attribution for causal mechanisms.
 
-This repository connects an **actual reported undergraduate survey study** with reproducible aggregate-level econometric audits, an authorized-data robustness implementation, and an exploratory scikit-learn/XAI research pipeline. Its computational demonstrations remain distinct from original student-data validation and causal identification.
+**Evidence provenance:** Original SPSS participant-level data have been analyzed **privately**, and the revised author manuscript reports the corresponding econometric and internal ML/XAI findings. The dataset itself is **not public**, and the manuscript is a **working scholarly draft—not represented as peer-reviewed or published**. Public materials in this repository include aggregate results and privacy-conscious visualizations, together with a **separate, clearly synthetic software demonstration**.
 
-> **Research integrity statement:** The source student-level data, model output files, and independent econometric replication materials are **not available in this public repository**. Historical performance and causal claims in a prior README have been preserved in [an explicitly unverified archive](docs/LEGACY_RESULTS_UNVERIFIED.md). The Streamlit application is a **construct-exploration and policy-governance lab**, not a fitted prediction service.
+**[Explore original-data empirical results and publication-safe figures →](docs/REAL_DATA_VALIDATION.md)**
 
-## Real-world undergraduate study | Reported empirical evidence
 
-**Source:** Author-supplied 30-page research draft describing a
-**single-site undergraduate survey (N = 156; complete-case OLS n = 152)**.
-The underlying participant-level dataset and original model-output files
-have **not** been supplied. The real-study visualizations below display
-manuscript-reported statistics, *not* re-estimated microdata or validated
-out-of-sample machine-learning predictions.
+## Real undergraduate study | Econometrics, predictive modeling, and XAI
 
-<details>
-<summary><b>Evidence status: reported results, reproducibly audited from aggregates</b></summary>
+The **original restricted SPSS survey** includes **156 undergraduate respondents** at one private Midwestern U.S. institution, with **152 complete cases** for the primary three-predictor study. Results below derive from private analysis of these **real observations**, not simulation.
 
-- Manuscript: *Predicting Undergraduate Students' Thriving: An Empirical
-  Econometric and Psychosocial Investigation in Higher Education*
-  (Siddique & Briggs, research draft).
-- Original respondent records are not publicly released and have not been
-  independently audited.
-- Regression-model consistency and additional partial R² and VIF
-  calculations can be reproduced from the reported tables.
-- Previously claimed XGBoost/LightGBM accuracy statistics remain
-  **unverified** on the original student data.
+### Primary regression and HC3-robust uncertainty
 
-</details>
-
-| Study evidence | Reported or calculated result |
+| Econometric finding | Original-data result |
 |---|---|
-| Participants | 156 surveyed; 152 complete-case OLS observations |
-| Model | Thriving Quotient ~ community + integrity + spirituality |
-| In-sample fit | **R² = .436**, adjusted **R² = .424** |
-| Omnibus test | **F(3, 148) = 38.11, p < .001** |
-| Community association | **B = .405, 95% CI [.293, .518]** |
-| Integrity association | B = −.030, 95% CI [−.122, .063] |
-| Spirituality/purpose association | B = .110, 95% CI [.027, .193] |
+| Model | TQ_MEAN ~ SCOMM + INTEGRITY + SPIR |
+| Overall OLS fit | **R² = .436**, adjusted R² = .424; **F(3, 148) = 38.11** |
+| Sense of community | **B = .405**, HC3 95% CI **[.267, .543]** |
+| Institutional integrity | B = −.030, HC3 95% CI [−.125, .066] |
+| Spirituality | B = .110, HC3 95% CI [.008, .212] |
+| Specification diagnostics | Breusch–Pagan p = .0085; Ramsey RESET p = .0007 |
 
-### Real-study regression coefficients and confidence intervals
+The diagnostics motivate **robust inference and careful model interpretation**, not conclusions about causal pathways or validated mediation. Spirituality's coefficient is less stable in an exploratory extended specification.
 
-![OLS regression coefficient estimates and confidence intervals reported in the undergraduate flourishing research draft](docs/figures/REPORTED_ols_coefficients.svg)
+### Out-of-sample prediction within the same institution
 
-*Source: reported multivariable OLS table from the author's research draft.
-Confidence intervals are descriptive of estimated conditional associations,
-not effects of interventions.*
+Seven model configurations were compared across **5-fold cross-validation repeated five times (25 matched held-out folds)**, using the three theory-specified predictors. Differences between XGBoost and Random Forest are **negligible** relative to model variability.
 
-### Empirical correlations among flourishing constructs
+| Algorithm | Mean RMSE ↓ | Mean MAE ↓ | Mean fold R² ↑ |
+|---|---:|---:|---:|
+| **XGBoost** | **.3794** | **.2906** | .3814 |
+| Random Forest | .3802 | .2931 | **.3840** |
+| LightGBM | .3880 | .3031 | .3537 |
+| ElasticNet | .3979 | .2995 | .3315 |
+| Ridge | .3994 | .3001 | .3251 |
+| OLS | .3995 | .3006 | .3183 |
+| Mean-only baseline | .5126 | .4052 | −.0466 |
 
-![Observed study correlation matrix transcribed from the manuscript's summary table](docs/figures/REPORTED_correlations.svg)
+![Real original-data study aggregate RMSE benchmark: XGBoost, Random Forest, LightGBM, and linear alternatives](docs/figures/REAL_STUDY_model_errors.svg)
 
-*Source: reported pairwise correlation matrix (N varying from 152–156).*
+*Mean of 25 overlapping held-out-fold RMSEs. These are internal validation results; no cross-institution test or statistical claim of winner superiority is made.*
 
-### Advanced econometric insight: uniquely explained variation
+### Explainable AI | Aggregate held-out SHAP
 
-![Derived model contribution using reported omnibus F and predictor t statistics](docs/figures/DERIVED_unique_explanatory_contributions.svg)
+The **first five-fold repetition** yielded withheld-case XGBoost explanations for 152 participants. Public reporting includes only the **aggregate SHAP magnitudes**, not respondent-level plots.
 
-*Derived aggregate-data audit—not an original-data re-estimation. Community
-has the largest drop-one-predictor incremental R² (approximately .193),
-followed by spirituality (.026) and institutional integrity (.002).
-These quantities are not causal contributions.*
+![Mean absolute out-of-fold Tree SHAP feature importance from privately analyzed undergraduate survey](docs/figures/REAL_STUDY_aggregate_SHAP.svg)
 
-**Reproduce the audit, no private dataset required:**
+Mean absolute SHAP: community **.2584**; spirituality **.1300**; integrity **.0514**. These values reflect model feature reliance and **do not imply causal or intervention effects**.
 
-```bash
-python -m src.reported_evidence_audit
-```
+**Full documentation and public aggregates:** [Original-data results](docs/REAL_DATA_VALIDATION.md) · [CV metrics](evidence/REAL_STUDY_cv_summary.csv) · [SHAP summaries](evidence/REAL_STUDY_shap_summary.csv) · [Research-to-policy brief](docs/EDUCATION_POLICY_BRIEF.md)
 
-**Advance to new econometric inference after authorized data access:**
-
-```bash
-python -m src.real_data_econometrics --data /secure/path/real_study.csv \
-  --output-dir results/real_study --bootstrap 1000
-```
-
-The new runner implements **HC3-robust OLS**, the **Breusch–Pagan test**,
-**Ramsey RESET**, **VIF**, **Cook's distance**, **nested model ΔR²**, and
-**case-resampling confidence intervals**. These methods are *implemented*,
-but their new empirical results are **not yet available**. The missing
-participant data cannot be reconstructed reliably from a 30-page summary.
-
-**Explore:** [Full reported-study analysis](docs/EMPIRICAL_EVIDENCE.md) ·
-[Advanced econometric protocol](docs/ADVANCED_ECONOMETRICS.md) ·
-[Research-to-policy recommendations](docs/EDUCATION_POLICY_BRIEF.md) ·
-[Restricted data and codebook crosswalk](data/README.md)
+**The historical manuscript-only aggregate audit is preserved for transparency** in [the former-study evidence document](docs/EMPIRICAL_EVIDENCE.md). Synthetic algorithm demonstration figures and scores remain separate below; they are **not** empirical results.
 
 ---
 
@@ -104,10 +71,10 @@ participant data cannot be reconstructed reliably from a 30-page summary.
 | **Outcome** | `TQ_MEAN`: project-described 24-item thriving composite (1–6; scoring not independently audited) |
 | **Predictors** | Sense of community, institutional integrity, spirituality/meaning, perceived fit, tuition value, first-generation status, gender code, family income tier |
 | **Statistical learning** | Mean baseline, ElasticNetCV, Random Forest, XGBoost, LightGBM |
-| **Validation** | Train-fold preprocessing, 10-fold R² / RMSE / MAE; optional group-disjoint CV |
+| **Validation** | Original-data study: repeated 5×5-fold internal CV; separate generic modeling pipeline offers other CV configurations |
 | **Explainability** | Exploratory Tree SHAP; model attribution **does not imply causality** |
 | **Policy focus** | Equitable student support, transparent evidence standards, privacy, and governance |
-| **Current evidence** | Real-study **manuscript-reported** OLS aggregates and derived audit, plus synthetic-only ML/XAI demonstrations; original-data replication pending |
+| **Current evidence** | Privately reanalyzed original SPSS data, original-data 25-fold ML benchmark and held-out aggregate SHAP; separate synthetic CI demonstrations. External validation pending. |
 
 ## Why this research matters
 
@@ -120,7 +87,7 @@ Student flourishing cannot be responsibly reduced to a ranking or algorithmic la
 
 The theoretical framing draws on [Tinto (1975)](https://doi.org/10.3102/00346543045001089), [Astin (1984)](docs/RESEARCH_DESIGN.md), and [Ryan and Deci (2000)](https://doi.org/10.1037/0003-066X.55.1.68). Feature-level explanation is informed by [Lundberg and Lee (2017)](https://arxiv.org/abs/1705.07874).
 
-## Executable research demonstration | Explicitly synthetic data
+## Separate reproducible demonstration | Explicitly synthetic data
 
 The project now contains an executable demonstration of the full
 **mean-only baseline → regularized ElasticNet → Random Forest → XGBoost →
@@ -145,7 +112,7 @@ Read the [Model Card](docs/MODEL_CARD.md),
 [research-validation checklist](docs/VALIDATION_CHECKLIST.md) and
 [privacy-conscious subgroup diagnostics](src/policy_diagnostics.py).
 
-## Visual analytics: ElasticNet, XGBoost, LightGBM, and Tree SHAP
+## Software demonstration visuals: ElasticNet, XGBoost, LightGBM, and Tree SHAP (SYNTHETIC ONLY)
 
 **Executed computational demonstration using simulated observations—not real
 student outcomes or validated institutional performance.** The charts below
@@ -329,8 +296,10 @@ Use [CITATION.cff](CITATION.cff) for this software repository. Cite individual e
 - [x] Implement baseline + four model families, train-fold transformations, optional SHAP
 - [x] Add schema checks, group-aware CV option, ethical policy interface, and synthetic-only CI
 - [x] Attribute and audit reported real-study aggregates, including model consistency and unique contributions
+- [x] Reanalyze original privately held survey data and document 25-fold internal validation + aggregate held-out SHAP
+- [x] Publish privacy-safe aggregate figures and model-comparison CSVs (not respondent records)
 - [x] Implement an authorized-data econometric robustness runner (HC3, bootstrap, diagnostics)
-- [ ] Secure and document the authorized source dataset and survey instrument
+- [ ] Confirm institutional authorization and publishable documentation of source data provenance, ethics and survey instrument (raw records remain restricted)
 - [ ] Recompute benchmark tables with reproducible experiment manifests
 - [ ] Validate psychometric scoring, measurement invariance, missingness, and possible leakage
 - [ ] Evaluate across cohorts and institutions with credible uncertainty

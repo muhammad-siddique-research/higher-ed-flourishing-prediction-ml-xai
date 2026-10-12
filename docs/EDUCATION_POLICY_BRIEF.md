@@ -8,30 +8,37 @@ faculty, and higher education policy teams.
 ## Why this research matters
 
 Students' experiences of belonging, institutional trust, purpose, perceived
-fit and affordability warrant thoughtful investigation. A reproducible
-predictive model may help clarify patterns in *authorized aggregate research*.
+fit and affordability warrant thoughtful investigation. Internal predictive models may describe patterns in the privately analyzed original survey, while public reporting is restricted to approved aggregates.
 A prediction does not establish which student-support intervention works.
 
-## Empirical signals from the author's actual study
+## Empirical signals from original-data reanalysis
 
-The author-supplied manuscript describes 156 survey respondents at a
-single private Midwestern higher education institution, including
-152 complete cases in the three-predictor OLS.
+The original private SPSS survey contains **156 undergraduates** at a single
+private Midwestern institution; the primary three-predictor model uses
+**152 complete cases**. The replicated OLS explains 43.6% of variance in
+thriving *within the observed sample* (adjusted R² = .424).
 
-The reported model explains approximately 43.6% of thriving variance in
-sample (adjusted R² = .424). Sense of community has the largest
-conditional relationship with thriving (B = .405, 95% CI [.293, .518]).
-Spirituality/purpose shows a smaller positive conditional association
-(B = .110, 95% CI [.027, .193]); institutional integrity's conditional
-coefficient is not distinguishable from zero in this model
-(B = −.030, 95% CI [−.122, .063]).
+**HC3-robust conditional estimates:** sense of community B = .405,
+95% CI [.267, .543]; spirituality B = .110, 95% CI [.008, .212];
+institutional integrity B = −.030, 95% CI [−.125, .066].
+Significant heteroskedasticity and specification diagnostics reinforce the
+need for cautious inference; spirituality is sensitive to additional
+institutional-perception controls.
 
-**What this does NOT prove:** an intervention raising a scale score by one
-point raises thriving by the same regression coefficient. The survey
-is cross-sectional, and these are original-manuscript-reported aggregate
-figures, not independently replicated raw-data estimations. The lack
-of a conditional integrity effect does not justify deprioritizing ethical
-leadership or institutional fairness.
+**Exploratory predictive evidence:** XGBoost and Random Forest yielded
+comparable held-out RMSEs (**.379 and .380**, respectively) on 25 overlapping
+validation folds. Held-out Tree SHAP ranked community first in mean absolute
+model attributions. This pattern **is not evidence that a community
+intervention will cause thriving to increase**.
+
+The research supports designing *evaluations* of inclusive mentoring,
+faculty-student contact and welcoming campus communities, not using
+algorithmic risk scores for individual decisions. Institutional integrity
+and protected student autonomy remain responsibilities independently of
+a model coefficient.
+
+See the [original-data evidence report](REAL_DATA_VALIDATION.md) for
+publication-safe figures and detailed methodological limitations.
 
 ### An implementable institutional learning agenda
 

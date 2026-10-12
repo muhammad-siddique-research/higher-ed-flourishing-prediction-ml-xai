@@ -1,8 +1,12 @@
 # Data access and schema
 
 Student-level flourishing observations are **not distributed** in this public repository.
-No synthetic training dataset is presented as evidence, and no model evaluation
-metrics have been certified by the current repository artifacts.
+The original SPSS survey was reanalyzed in a private, authorized research setting;
+only public **aggregate original-data ML/XAI metrics** and the separately labeled
+synthetic software demonstrations are available here. See
+[real-data validation](../docs/REAL_DATA_VALIDATION.md).
+These results are internally cross-validated only; no external prediction claims
+are supported.
 
 To reproduce the benchmark, obtain the original dataset under appropriate
 institutional authorization, privacy review, and data-use agreement.

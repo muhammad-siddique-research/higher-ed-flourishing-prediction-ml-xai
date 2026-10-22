@@ -1,5 +1,5 @@
 # The Science of Student Thriving: Econometrics and Explainable AI Analysis
-### Real-data econometric evidence · Internal ML validation · Transparent educational policy
+### Real-data Econometric Evidence · Internal ML Validation · Transparent Educational Policy
 
 [![Executable SYNTHETIC ML/XAI demo](https://github.com/muhammad-siddique-research/higher-ed-flourishing-prediction-ml-xai/actions/workflows/synthetic-demo.yml/badge.svg)](https://github.com/muhammad-siddique-research/higher-ed-flourishing-prediction-ml-xai/actions/workflows/synthetic-demo.yml)
 [![CI: synthetic-data tests](https://github.com/muhammad-siddique-research/higher-ed-flourishing-prediction-ml-xai/actions/workflows/ci.yml/badge.svg)](https://github.com/muhammad-siddique-research/higher-ed-flourishing-prediction-ml-xai/actions/workflows/ci.yml)
@@ -7,18 +7,18 @@
 ![Python](https://img.shields.io/badge/Python-3.11%2B-3776AB)
 ![Research status](https://img.shields.io/badge/Evidence%20status-original--data%20internal%20validation-blue)
 
-**Reanalysis of a real undergraduate survey (N = 156; analytic n = 152)** integrating replicated OLS, HC3-robust inference, XGBoost, Random Forest, LightGBM, regularized regression, and held-out Tree SHAP. The research aims to clarify how community belonging, institutional integrity, and spirituality relate to thriving, without mistaking predictive attribution for causal mechanisms.
+**Reanalysis of a Real Undergraduate Survey (N = 156; Analytic n = 152)** integrating replicated OLS, HC3-robust inference, XGBoost, Random Forest, LightGBM, regularized regression, and held-out Tree SHAP. The research aims to clarify how community belonging, institutional integrity, and spirituality relate to thriving, without mistaking predictive attribution for causal mechanisms.
 
-**Evidence provenance:** Original SPSS participant-level data have been analyzed **privately**, and the revised author manuscript reports the corresponding econometric and internal ML/XAI findings. The dataset itself is **not public**, and the manuscript is a **working scholarly draft—not represented as peer-reviewed or published**. Public materials in this repository include aggregate results and privacy-conscious visualizations, together with a **separate, clearly synthetic software demonstration**.
+**Evidence Provenance:** Original SPSS participant-level data have been analyzed **privately**, and the revised author manuscript reports the corresponding econometric and internal ML/XAI findings. The dataset itself is **not public**, and the manuscript is a **working scholarly draft—not represented as peer-reviewed or published**. Public materials in this repository include aggregate results and privacy-conscious visualizations, together with a **separate, clearly synthetic software demonstration**.
 
 **[Explore original-data empirical results and publication-safe figures →](docs/REAL_DATA_VALIDATION.md)**
 
 
-## Real undergraduate study | Econometrics, predictive modeling, and XAI
+## Real Undergraduate Study | Econometrics, Predictive Modeling, and XAI
 
 The **original restricted SPSS survey** includes **156 undergraduate respondents** at one private Midwestern U.S. institution, with **152 complete cases** for the primary three-predictor study. Results below derive from private analysis of these **real observations**, not simulation.
 
-### Primary regression and HC3-robust uncertainty
+### Primary Regression and HC3-Robust Uncertainty
 
 | Econometric finding | Original-data result |
 |---|---|
@@ -31,7 +31,7 @@ The **original restricted SPSS survey** includes **156 undergraduate respondents
 
 The diagnostics motivate **robust inference and careful model interpretation**, not conclusions about causal pathways or validated mediation. Spirituality's coefficient is less stable in an exploratory extended specification.
 
-### Out-of-sample prediction within the same institution
+### Out-of-Sample Prediction within the Same Institution
 
 Seven model configurations were compared across **5-fold cross-validation repeated five times (25 matched held-out folds)**, using the three theory-specified predictors. Differences between XGBoost and Random Forest are **negligible** relative to model variability.
 
@@ -63,7 +63,7 @@ Mean absolute SHAP: community **.2584**; spirituality **.1300**; integrity **.05
 
 ---
 
-## Research at a glance
+## Research at a Glance
 
 | Dimension | Research approach |
 |---|---|
@@ -76,7 +76,7 @@ Mean absolute SHAP: community **.2584**; spirituality **.1300**; integrity **.05
 | **Policy focus** | Equitable student support, transparent evidence standards, privacy, and governance |
 | **Current evidence** | Privately reanalyzed original SPSS data, original-data 25-fold ML benchmark and held-out aggregate SHAP; separate synthetic CI demonstrations. External validation pending. |
 
-## Why this research matters
+## Why this Research Matters?
 
 Student flourishing cannot be responsibly reduced to a ranking or algorithmic label. Institutions need reliable measures of students' experiences, defensible estimates of predictive uncertainty, and evidence that proposed supports are both useful and equitable. This repository separates:
 
@@ -87,7 +87,7 @@ Student flourishing cannot be responsibly reduced to a ranking or algorithmic la
 
 The theoretical framing draws on [Tinto (1975)](https://doi.org/10.3102/00346543045001089), [Astin (1984)](docs/RESEARCH_DESIGN.md), and [Ryan and Deci (2000)](https://doi.org/10.1037/0003-066X.55.1.68). Feature-level explanation is informed by [Lundberg and Lee (2017)](https://arxiv.org/abs/1705.07874).
 
-## Separate reproducible demonstration | Explicitly synthetic data
+## Separate Reproducible Demonstration | Explicitly Synthetic Data
 
 The project now contains an executable demonstration of the full
 **mean-only baseline → regularized ElasticNet → Random Forest → XGBoost →
@@ -103,8 +103,7 @@ python -m examples.synthetic_demo --shap
 
 A separate [GitHub Actions demonstration workflow](.github/workflows/synthetic-demo.yml) executes the example with Tree SHAP and publishes a downloadable, explicitly synthetic research artifact for inspection.
 
-**All generated results and figures are marked SYNTHETIC and are not
-evidence about actual students or empirical model performance.**
+**All results and figures are marked SYNTHETIC and are evidence about actual students dataset or empirical model performance.**
 The outputs are stored locally in the git-ignored `demo_outputs/` directory.
 
 Read the [Model Card](docs/MODEL_CARD.md),
@@ -112,7 +111,7 @@ Read the [Model Card](docs/MODEL_CARD.md),
 [research-validation checklist](docs/VALIDATION_CHECKLIST.md) and
 [privacy-conscious subgroup diagnostics](src/policy_diagnostics.py).
 
-## Software demonstration visuals: ElasticNet, XGBoost, LightGBM, and Tree SHAP (SYNTHETIC ONLY)
+## Software Demonstration Visuals: ElasticNet, XGBoost, LightGBM, and Tree SHAP (SYNTHETIC ONLY)
 
 **Executed computational demonstration using simulated observations—not real
 student outcomes or validated institutional performance.** The charts below
@@ -120,7 +119,7 @@ are generated by [the reproducible synthetic research workflow](.github/workflow
 and shown here as tracked, previously generated snapshots. The automated workflow
 only tests the demo and uploads run artifacts; it does **not** commit new bot-authored changes.
 
-### A. Out-of-group prediction performance
+### A. Out-of-Group Prediction Performance
 
 ![SYNTHETIC model comparison of regularized ElasticNet, XGBoost, LightGBM, Random Forest and mean-only baseline](docs/figures/SYNTHETIC_model_comparison.png)
 
@@ -141,7 +140,7 @@ effectiveness on actual students.*
 synthetic data-generating process*. That illustrates why credible ML research
 benchmarks model complexity rather than assuming boosted trees must dominate.
 
-### B. Tree SHAP: understanding predictions, not causes
+### B. Tree SHAP: Understanding Predictions, not Causes
 
 ![SYNTHETIC XGBoost Tree SHAP beeswarm using hypothetical undergraduate flourishing data](docs/figures/SYNTHETIC_tree_shap.png)
 
@@ -159,7 +158,7 @@ variable would improve a real student's flourishing.**
 [Inspect synthetic model scores](docs/figures/SYNTHETIC_model_metrics.csv) ·
 [Inspect fold-level validation](docs/figures/SYNTHETIC_fold_metrics.csv)
 
-## Research-to-policy workflow
+## Research-to-Policy Workflow
 
 ```mermaid
 flowchart TD
@@ -173,7 +172,7 @@ flowchart TD
   G --> H["Separately evaluated student-support policy"]
 ```
 
-## Model architecture
+## Model Architecture
 
 ```text
 Authorized, institutionally governed study data
@@ -201,9 +200,9 @@ Interpretive review + transportability/fairness checks
 Separately evaluated educational policy decisions
 ```
 
-**Methodological boundary:** ElasticNetCV uses inner training-data cross-validation to select its penalty. Tree-based candidates have fixed documented settings; the code does not claim a fully nested search for all algorithms or independent test-set validation.
+**Methodological Boundary:** ElasticNetCV uses inner training-data cross-validation to select its penalty. Tree-based candidates have fixed documented settings; the code does not claim a fully nested search for all algorithms or independent test-set validation.
 
-## Feature dictionary
+## Feature Dictionary
 
 | Field | Role | Interpretation |
 |---|---|---|
@@ -219,7 +218,7 @@ Separately evaluated educational policy decisions
 
 > **No student-level dataset is included.** Scale validity, coding, sample design, permissions, and fairness implications must be reviewed with the original data owner before a new research claim or application.
 
-## Run the reproducible pipeline
+## Run the Reproducible Pipeline
 
 ```bash
 git clone https://github.com/muhammad-siddique-research/higher-ed-flourishing-prediction-ml-xai.git
@@ -239,13 +238,13 @@ The script generates aggregate results under `results/`, which is ignored by Git
 
 For instructions and research standards, see [Reproducibility](docs/REPRODUCIBILITY.md) and [Data Access](data/README.md).
 
-## Interactive research and policy lab
+## Interactive Research and Policy Lab
 
 **[Open the Streamlit app](https://higher-ed-flourishing-prediction-ml-xai-cj3qpcffjve46ochqrdtn9.streamlit.app/)**
 
 The dashboard explains the available evidence and allows users to visualize **hypothetical perception profiles** for five constructs. The bar chart shows the input values, **not** a predicted score, effect estimate, validated risk category, or automated student assessment. A governance checklist highlights what must be established before considering institutional adoption.
 
-## Responsible research and policy translation
+## Responsible Research and Policy Translation
 
 - **Privacy:** educational records require institutionally approved data access; no raw student data or identifiers should be committed.
 - **Fairness:** check errors and measurement validity across relevant student groups, with adequate data and appropriate ethical safeguards.
@@ -255,7 +254,7 @@ The dashboard explains the available evidence and allows users to visualize **hy
 
 Read [Research Design](docs/RESEARCH_DESIGN.md), [Data Governance](docs/DATA_GOVERNANCE.md), [Model Card](docs/MODEL_CARD.md), and [Education Policy Brief](docs/EDUCATION_POLICY_BRIEF.md).
 
-## Repository navigation
+## Repository Navigation
 
 ```text
 .
@@ -281,7 +280,7 @@ Read [Research Design](docs/RESEARCH_DESIGN.md), [Data Governance](docs/DATA_GOV
 └── LICENSE                           MIT license for repository code
 ```
 
-## Research team and attribution
+## Research Team and Attribution
 
 - **Muhammad Siddique** — PhD candidate; research, econometrics, machine learning, educational technology, and reproducibility.
 - **Chad Briggs** — listed as a collaborator in the original repository; institutional research and effectiveness, Judson University.
@@ -290,19 +289,4 @@ Institutional affiliations and substantive authorship roles should be confirmed 
 
 ## How to cite
 
-Use [CITATION.cff](CITATION.cff) for this software repository. Cite individual empirical studies and datasets separately, using their authorized bibliographic records. **A GitHub repository is not, by itself, evidence of peer-reviewed validation.**
-
-## Roadmap toward a publication-grade study
-
-- [x] Implement baseline + four model families, train-fold transformations, optional SHAP
-- [x] Add schema checks, group-aware CV option, ethical policy interface, and synthetic-only CI
-- [x] Attribute and audit reported real-study aggregates, including model consistency and unique contributions
-- [x] Reanalyze original privately held survey data and document 25-fold internal validation + aggregate held-out SHAP
-- [x] Publish privacy-safe aggregate figures and model-comparison CSVs (not respondent records)
-- [x] Implement an authorized-data econometric robustness runner (HC3, bootstrap, diagnostics)
-- [ ] Confirm institutional authorization and publishable documentation of source data provenance, ethics and survey instrument (raw records remain restricted)
-- [ ] Recompute benchmark tables with reproducible experiment manifests
-- [ ] Validate psychometric scoring, measurement invariance, missingness, and possible leakage
-- [ ] Evaluate across cohorts and institutions with credible uncertainty
-- [ ] Review fairness, governance, stakeholder impact, and intervention evidence
-- [ ] Publish a results paper only after verification and necessary research approvals
+Use [CITATION.cff](CITATION.cff) for this software repository. Cite individual empirical studies and datasets separately, using their authorized bibliographic records.

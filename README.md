@@ -1,4 +1,4 @@
-# The Science of Student Thriving: Econometrics and Explainable AI Analysis
+# The Science of Student Thriving: An Econometric and Explainable AI Framework for Higher Education
 ### Real-data Econometric Evidence · Internal ML Validation · Transparent Educational Policy
 
 [![Executable SYNTHETIC ML/XAI demo](https://github.com/muhammad-siddique-research/higher-ed-flourishing-prediction-ml-xai/actions/workflows/synthetic-demo.yml/badge.svg)](https://github.com/muhammad-siddique-research/higher-ed-flourishing-prediction-ml-xai/actions/workflows/synthetic-demo.yml)
